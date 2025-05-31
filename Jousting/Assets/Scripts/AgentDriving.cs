@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 
 public class AgentDriving : MonoBehaviour
 {
-    [SerializeField] private GameObject nextCheckpoint;
+    public GameObject nextCheckpoint;
+    public float placementCheckpointModifier;
     [SerializeField] Rigidbody rb;
-    bool racing = false;
+    public bool racing = false;
+    public float placementDistance;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -22,7 +22,7 @@ public class AgentDriving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        placementDistance = Vector3.Distance(nextCheckpoint.transform.position, transform.position) + placementCheckpointModifier;
     }
 
     private void FixedUpdate()
@@ -50,10 +50,5 @@ public class AgentDriving : MonoBehaviour
     {
         racing = true;
         StartCoroutine(setSpeed());
-    }
-
-    public void setCheckpoint(GameObject newCheckpoint)
-    {
-        nextCheckpoint = newCheckpoint;
     }
 }

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-
+    [SerializeField] public float ID;
     [SerializeField] public GameObject nextCheckpoint;
+    [SerializeField] public bool finalCheckpoint = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,9 +21,12 @@ public class CheckpointScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if (other.gameObject.GetComponent<AgentDriving>() != null)
+       if (other.gameObject.GetComponent<PlacementChecker>() != null)
         {
-            other.gameObject.GetComponent<AgentDriving>().setCheckpoint(nextCheckpoint);
+            if (!finalCheckpoint)
+            {
+                other.gameObject.GetComponent<PlacementChecker>().setCheckpoint(nextCheckpoint);
+            }
         }
     }
 }
