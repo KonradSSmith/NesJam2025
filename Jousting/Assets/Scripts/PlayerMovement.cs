@@ -5,9 +5,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
+
     [SerializeField] private InputSystem_Actions actions;
+
+    //change this
     [SerializeField] private float minCameraRotationAmount;
-    [SerializeField] private float cameraRotationSpeed;
+    //[SerializeField] private float cameraRotationSpeed;
+
     private Rigidbody rb;
     private Vector2 moveInput;
 

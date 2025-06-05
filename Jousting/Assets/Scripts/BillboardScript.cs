@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BillboardScript : MonoBehaviour
 {
-        public Transform cameraTransform;
+        private Transform cameraTransform;
 
         // Use this for initialization
         void Start()
