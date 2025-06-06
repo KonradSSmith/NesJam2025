@@ -4,10 +4,10 @@ using UnityEngine;
 public class AgentDriving : MonoBehaviour
 {
     public GameObject nextCheckpoint;
-    public float placementCheckpointModifier;
+    [SerializeField] private PlacementChecker checker;
+
     [SerializeField] Rigidbody rb;
     public bool racing = false;
-    public float placementDistance;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -17,12 +17,6 @@ public class AgentDriving : MonoBehaviour
     private void Start()
     {
         startRace();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        placementDistance = Vector3.Distance(nextCheckpoint.transform.position, transform.position) + placementCheckpointModifier;
     }
 
     private void FixedUpdate()
@@ -39,8 +33,16 @@ public class AgentDriving : MonoBehaviour
     {
         while (racing)
         {
-            moveSpeed = Random.Range(20, 55);
-            acceleration = moveSpeed;
+            if (checker.placementDistance > checker.playerPlacementDistance + 65)
+            {
+                moveSpeed = Random.Range(100, 140);
+                acceleration = moveSpeed;
+            }
+            else if (checker.placementDistance < checker.playerPlacementDistance - 45)
+            {
+                moveSpeed = Random.Range(20, 45);
+                acceleration = moveSpeed;
+            }
             yield return new WaitForSeconds(Random.Range(1, 3));
         }
 

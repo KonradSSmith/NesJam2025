@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,6 +14,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     bool reversing = false;
 
+    [Header("Sprites")]
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite horseForward;
+    [SerializeField] Sprite horseTurn1;
+    [SerializeField] Sprite horseTurn2;
+    [SerializeField] Sprite horseTurn3;
+
     [SerializeField] private InputSystem_Actions actions;
 
     [Header("Camera")]
@@ -26,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     bool driftingRight;
     bool waitingToDrift;
     private Coroutine driftCoroutine;
+    float timeDrifting = 0;
+    float _timer = 0;
 
     [Header("Drifting Boosts")]
     [SerializeField] private float timeUntilBoost1;
@@ -34,9 +44,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float timeUntilBoost2;
     [SerializeField] private float boostAmount2;
     [SerializeField] private float boostTime2;
-    [SerializeField] private float timeUntilBoost3;
-    [SerializeField] private float boostAmount3;
-    [SerializeField] private float boostTime3;
     bool boosting;
     private Coroutine boostCoroutine;
 
@@ -109,6 +116,49 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         CheckDrift();
+        SetSprite();
+    }
+
+    private void SetSprite()
+    {
+        _timer += Time.deltaTime;
+        if (moveInput.x == 0)
+        {
+            spriteRenderer.sprite = horseForward;
+        }
+        else if(moveInput.x > 0)
+        {
+            spriteRenderer.flipX = true;
+            spriteRenderer.sprite = horseTurn1;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+            spriteRenderer.sprite = horseTurn1;
+        }
+
+        if (driftingLeft || driftingRight)
+        {
+            if (driftingLeft)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
+
+            if (_timer > timeUntilBoost2)
+            {
+                //boost2
+                spriteRenderer.sprite = horseTurn3;
+            }
+            else if (_timer > timeUntilBoost1)
+            {
+                //boost1
+                spriteRenderer.sprite = horseTurn2;
+            }
+        }
     }
 
     private void CheckDrift()
@@ -141,7 +191,6 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Drift()
     {
         bool drifting = true;
-        float timeDrifting = 0;
         while (drifting)
         {
             timeDrifting += Time.deltaTime;
@@ -165,31 +214,21 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator DriftBoost(float time)
     {
+        _timer = 0;
         float boostTime = 0;
-        if (time < timeUntilBoost1)
-        {
-            yield return null;
-        }
-        else if (time < timeUntilBoost2)
-        {
-            //boost1
-            boosting = true;
-            boostAcceleration = boostAmount1;
-            boostTime = boostTime1;
-        }
-        else if(time < timeUntilBoost3)
+        if (time > timeUntilBoost2)
         {
             //boost2
             boosting = true;
             boostAcceleration = boostAmount2;
             boostTime = boostTime2;
         }
-        else
+        else if (time > timeUntilBoost1)
         {
-            //boost3
+            //boost1
             boosting = true;
-            boostAcceleration = boostAmount2;
-            boostTime = boostTime2;
+            boostAcceleration = boostAmount1;
+            boostTime = boostTime1;
         }
 
         float timer = 0;

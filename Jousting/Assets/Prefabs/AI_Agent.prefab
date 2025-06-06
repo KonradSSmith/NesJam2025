@@ -155,10 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextCheckpoint: {fileID: 0}
-  placementCheckpointModifier: 0
+  checker: {fileID: 5714822664345413510}
   rb: {fileID: 3408620075301955752}
   racing: 0
-  placementDistance: 0
   moveSpeed: 45
   acceleration: 45
 --- !u!114 &5714822664345413510
@@ -174,7 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5362730667501963825}
+  player: 0
   firstCheckpoint: {fileID: 0}
+  nextCheckpoint: {fileID: 0}
+  placementDistance: 0
+  playerPlacementDistance: 0
+  intPlacement: 0
+  playerPlacement: 0
 --- !u!1 &7320122105874829060
 GameObject:
   m_ObjectHideFlags: 0

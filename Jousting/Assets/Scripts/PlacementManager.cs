@@ -8,8 +8,8 @@ public class PlacementManager : MonoBehaviour
 {
     public static PlacementManager instance { get; private set; }
 
-    [SerializeField] public List<AgentDriving> horses = new List<AgentDriving>();
-    [SerializeField] public List<AgentDriving> sortedHorses = new List<AgentDriving>();
+    [SerializeField] public List<PlacementChecker> horses = new List<PlacementChecker>();
+    [SerializeField] public List<PlacementChecker> sortedHorses = new List<PlacementChecker>();
 
 
 
@@ -35,5 +35,17 @@ public class PlacementManager : MonoBehaviour
     void Update()
     {
         sortedHorses = sortedHorses.OrderBy(ch => ch.placementDistance).ToList();
+        foreach(PlacementChecker checker in sortedHorses)
+        {
+            checker.intPlacement = sortedHorses.IndexOf(checker) + 1;
+            if (checker.player)
+            {
+                foreach (PlacementChecker secondChecker in sortedHorses)
+                {
+                    secondChecker.playerPlacement = sortedHorses.IndexOf(checker) + 1;
+                    secondChecker.playerPlacementDistance = checker.placementDistance;
+                }
+            }
+        }
     }
 }
