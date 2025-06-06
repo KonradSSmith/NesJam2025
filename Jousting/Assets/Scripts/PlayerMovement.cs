@@ -1,21 +1,44 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [Header("Basic Movement")]
+    [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
+    [SerializeField] private float driftingAcceleration;
+    private float boostAcceleration = 1;
+    private Rigidbody rb;
+    private Vector2 moveInput;
+    bool reversing = false;
 
     [SerializeField] private InputSystem_Actions actions;
 
-    //change this
-    [SerializeField] private float minCameraRotationAmount;
-    //[SerializeField] private float cameraRotationSpeed;
+    [Header("Camera")]
+    [SerializeField] private float defaultCameraRotationAmount;
+    private float boostCameraRotationAmount = 1;
 
-    private Rigidbody rb;
-    private Vector2 moveInput;
+    [Header("Drifting")]
+    [SerializeField] private float sharpDriftCameraRotationAmount;
+    [SerializeField] private float wideDriftCameraRotationAmount;
+    bool driftingLeft;
+    bool driftingRight;
+    bool waitingToDrift;
+    private Coroutine driftCoroutine;
 
-    bool reversing = false;
+    [Header("Drifting Boosts")]
+    [SerializeField] private float timeUntilBoost1;
+    [SerializeField] private float boostAmount1;
+    [SerializeField] private float boostTime1;
+    [SerializeField] private float timeUntilBoost2;
+    [SerializeField] private float boostAmount2;
+    [SerializeField] private float boostTime2;
+    [SerializeField] private float timeUntilBoost3;
+    [SerializeField] private float boostAmount3;
+    [SerializeField] private float boostTime3;
+    bool boosting;
+    private Coroutine boostCoroutine;
 
     private void Awake()
     {
@@ -38,35 +61,146 @@ public class PlayerMovement : MonoBehaviour
         //get wasd vector
         moveInput = actions.Player.Move.ReadValue<Vector2>();
 
-        //add forward/backward velocity
-        rb.AddForce((transform.forward * moveInput.y) * acceleration);
-        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, speed);
-
         //check if reversing
         if (moveInput.y > 0)
         {
             reversing = false;
         }
-        else if (moveInput.y < 0)
-        { 
+        else if (moveInput.y < 0 && !boosting)
+        {
             reversing = true;
         }
+
+        //add forward/backward velocity
+        if (boosting && moveInput.y < 0)
+        {
+            //if reversing while boosting, still move forward but slower
+            rb.AddForce((transform.forward * moveInput.y) * acceleration * (0.4f * boostAcceleration));
+        }
+        else
+        {
+            rb.AddForce((transform.forward * moveInput.y) * acceleration * boostAcceleration);
+        }
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
 
         //invert steering if reversing
         switch (reversing)
         {
             case false:
-                transform.Rotate(0, moveInput.x * minCameraRotationAmount, 0);
+                if (moveInput.x > 0 && driftingRight || moveInput.x < 0 && driftingLeft)
+                {
+                    transform.Rotate(0, moveInput.x * sharpDriftCameraRotationAmount, 0);
+                }
+                else if (moveInput.x < 0 && driftingRight || moveInput.x > 0 && driftingLeft)
+                {
+                    transform.Rotate(0, moveInput.x * wideDriftCameraRotationAmount, 0);
+                }
+                else
+                {
+                    transform.Rotate(0, moveInput.x * defaultCameraRotationAmount * boostAcceleration, 0);
+                }
                 break;
             case true:
-                transform.Rotate(0, -moveInput.x * minCameraRotationAmount, 0);
+                transform.Rotate(0, -moveInput.x * defaultCameraRotationAmount * boostAcceleration, 0);
                 break;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        CheckDrift();
+    }
 
+    private void CheckDrift()
+    {
+        if (!driftingLeft && !driftingRight && Input.GetKeyDown(KeyCode.Space) && !waitingToDrift)
+        {
+            waitingToDrift = true;
+        }
+        if (waitingToDrift)
+        {
+            if (moveInput.x != 0)
+            {
+                driftCoroutine = StartCoroutine(Drift());
+            }
+            if (moveInput.x > 0)
+            {
+                waitingToDrift = false;
+                driftingLeft = false;
+                driftingRight = true;
+            }
+            else if (moveInput.x < 0)
+            {
+                waitingToDrift = false;
+                driftingLeft = true;
+                driftingRight = false;
+            }
+        }
+    }
+
+    IEnumerator Drift()
+    {
+        bool drifting = true;
+        float timeDrifting = 0;
+        while (drifting)
+        {
+            timeDrifting += Time.deltaTime;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                waitingToDrift = false;
+                driftingLeft = false;
+                driftingRight = false;
+                drifting = false;
+                if (boostCoroutine != null)
+                {
+                    StopCoroutine(boostCoroutine);
+                }
+                boostCoroutine = StartCoroutine(DriftBoost(timeDrifting));
+                StopCoroutine(driftCoroutine);
+            }
+            yield return null;
+        }
+        yield return null;
+    }
+
+    IEnumerator DriftBoost(float time)
+    {
+        float boostTime = 0;
+        if (time < timeUntilBoost1)
+        {
+            yield return null;
+        }
+        else if (time < timeUntilBoost2)
+        {
+            //boost1
+            boosting = true;
+            boostAcceleration = boostAmount1;
+            boostTime = boostTime1;
+        }
+        else if(time < timeUntilBoost3)
+        {
+            //boost2
+            boosting = true;
+            boostAcceleration = boostAmount2;
+            boostTime = boostTime2;
+        }
+        else
+        {
+            //boost3
+            boosting = true;
+            boostAcceleration = boostAmount2;
+            boostTime = boostTime2;
+        }
+
+        float timer = 0;
+        while (timer < boostTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        boosting = false;
+        boostAcceleration = 1;
+
+        yield return null;
     }
 }
