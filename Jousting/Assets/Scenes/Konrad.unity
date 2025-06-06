@@ -222,6 +222,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: 1
   firstCheckpoint: {fileID: 408161546}
+  lapsCompleted: 0
   nextCheckpoint: {fileID: 0}
   placementDistance: 0
   playerPlacementDistance: 0
@@ -2256,7 +2257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: boostTime1
-      value: 1.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: boostTime2
@@ -2276,7 +2277,7 @@ PrefabInstance:
       objectReference: {fileID: 612202282, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
     - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: boostAmount1
-      value: 1.8
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: boostAmount2

@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         }
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
 
+        /*
         //invert steering if reversing
         switch (reversing)
         {
@@ -110,6 +111,19 @@ public class PlayerMovement : MonoBehaviour
             case true:
                 transform.Rotate(0, -moveInput.x * defaultCameraRotationAmount * boostAcceleration, 0);
                 break;
+        }
+        */
+        if (moveInput.x > 0 && driftingRight || moveInput.x < 0 && driftingLeft)
+        {
+            transform.Rotate(0, moveInput.x * sharpDriftCameraRotationAmount, 0);
+        }
+        else if (moveInput.x < 0 && driftingRight || moveInput.x > 0 && driftingLeft)
+        {
+            transform.Rotate(0, moveInput.x * wideDriftCameraRotationAmount, 0);
+        }
+        else
+        {
+            transform.Rotate(0, moveInput.x * defaultCameraRotationAmount * boostAcceleration, 0);
         }
     }
 
