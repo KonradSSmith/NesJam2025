@@ -39,8 +39,9 @@ public class AgentDriving : MonoBehaviour
     {
         while (racing)
         {
-            moveSpeed = Random.Range(3, 6);
-            yield return new WaitForSeconds(Random.Range(1, 4));
+            moveSpeed = Random.Range(20, 55);
+            acceleration = moveSpeed;
+            yield return new WaitForSeconds(Random.Range(1, 3));
         }
 
         yield return null;
