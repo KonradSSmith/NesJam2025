@@ -5,8 +5,8 @@ public class Raycast : MonoBehaviour
     public GameObject lastHit;
     public Vector3 collision = Vector3.zero;
     public LayerMask enemyHorses;
-    private Vector3 raycastPos;
-    public Transform stickTransform;
+    public Transform cameraPos;
+    public Transform stickPos;
     void Start()
     {
         
@@ -15,9 +15,9 @@ public class Raycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var ray = new Ray(this.transform.position, this.transform.forward); //create raycast from attached obj
+        var ray = new Ray((cameraPos.position - stickPos.position).normalized, this.transform.forward); //create raycast from camera to jousting pole 
         RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, 100, enemyHorses)) //extend ray whatever range is, layermask to only hit the enemies
+        if (Physics.Raycast(ray, out hit, 100, enemyHorses)) //extend ray whatever range is, layermask to only hit the enemies
         {
             lastHit = hit.transform.gameObject;//last hit enemy
             Debug.Log(hit.transform.gameObject);
