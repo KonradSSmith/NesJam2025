@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 388802030430233184}
   - component: {fileID: 1199645199026995992}
   - component: {fileID: 8620042759371725313}
+  - component: {fileID: 7011927842471064310}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -639,18 +640,20 @@ MonoBehaviour:
   maxSpeed: 100
   acceleration: 45
   driftingAcceleration: 25
+  spriteRenderer: {fileID: 1319836976625378350}
+  horseForward: {fileID: 1093058197, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
+  horseTurn1: {fileID: -355979090, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
+  horseTurn2: {fileID: -848852576, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
+  horseTurn3: {fileID: 612202282, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
   defaultCameraRotationAmount: 1
   sharpDriftCameraRotationAmount: 2.5
   wideDriftCameraRotationAmount: -0.25
-  timeUntilBoost1: 1
-  boostAmount1: 2
-  boostTime1: 1
-  timeUntilBoost2: 2.5
-  boostAmount2: 2.75
-  boostTime2: 2.5
-  timeUntilBoost3: 3.5
-  boostAmount3: 4
-  boostTime3: 3.5
+  timeUntilBoost1: 2
+  boostAmount1: 1.3
+  boostTime1: 0.8
+  timeUntilBoost2: 3.5
+  boostAmount2: 3
+  boostTime2: 2
 --- !u!54 &1199645199026995992
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -699,3 +702,24 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7011927842471064310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8999197431838199392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bb38aea55e9d24ab1c18c3f3be8032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  player: 1
+  firstCheckpoint: {fileID: 0}
+  lapsCompleted: 0
+  nextCheckpoint: {fileID: 0}
+  placementDistance: 0
+  playerPlacementDistance: 0
+  intPlacement: 0
+  playerPlacement: 0
