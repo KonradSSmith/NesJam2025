@@ -2235,6 +2235,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: boostTime1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: boostAmount1
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: timeUntilBoost1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: timeUntilBoost2
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: driftCameraTurnAmount
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: wideDriftCameraRotationAmount
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 388802030430233184, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: sharpDriftCameraRotationAmount
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769074599661242021, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794690433039173103, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4506466962124419884, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -128

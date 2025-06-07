@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] private float defaultCameraRotationAmount;
-    private float boostCameraRotationAmount = 1;
+    [SerializeField] private float driftCameraTurnAmount;
 
     [Header("Drifting")]
     [SerializeField] private float sharpDriftCameraRotationAmount;
@@ -67,7 +67,14 @@ public class PlayerMovement : MonoBehaviour
     {
         //get wasd vector
         moveInput = actions.Player.Move.ReadValue<Vector2>();
-
+        if (driftingLeft)
+        {
+            moveInput.x -= driftCameraTurnAmount;
+        }
+        else if (driftingRight)
+        {
+            moveInput.x += driftCameraTurnAmount;
+        }
         //check if reversing
         if (moveInput.y > 0)
         {
@@ -135,7 +142,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetSprite()
     {
-        _timer += Time.deltaTime;
         if (moveInput.x == 0)
         {
             spriteRenderer.sprite = horseForward;
@@ -153,6 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (driftingLeft || driftingRight)
         {
+            _timer += Time.deltaTime;
             if (driftingLeft)
             {
                 spriteRenderer.flipX = false;
@@ -219,6 +226,8 @@ public class PlayerMovement : MonoBehaviour
                     StopCoroutine(boostCoroutine);
                 }
                 boostCoroutine = StartCoroutine(DriftBoost(timeDrifting));
+                timeDrifting = 0;
+                _timer = 0;
                 StopCoroutine(driftCoroutine);
             }
             yield return null;
