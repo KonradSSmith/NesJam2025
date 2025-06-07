@@ -11,6 +11,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] public List<PlacementChecker> horses = new List<PlacementChecker>();
     [SerializeField] public List<PlacementChecker> sortedHorses = new List<PlacementChecker>();
 
+    public bool racing = false;
 
 
     private void Awake()

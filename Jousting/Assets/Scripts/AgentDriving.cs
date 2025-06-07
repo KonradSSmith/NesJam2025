@@ -16,7 +16,15 @@ public class AgentDriving : MonoBehaviour
 
     private void Start()
     {
-        startRace();
+        //startRace();
+    }
+
+    private void Update()
+    {
+        if (!racing && PlacementManager.instance.racing)
+        {
+            startRace();
+        }
     }
 
     private void FixedUpdate()
@@ -35,7 +43,7 @@ public class AgentDriving : MonoBehaviour
         {
             if (checker.placementDistance > checker.playerPlacementDistance + 65)
             {
-                moveSpeed = Random.Range(100, 140);
+                moveSpeed = Random.Range(100, 130);
                 acceleration = moveSpeed;
             }
             else if (checker.placementDistance < checker.playerPlacementDistance - 45)

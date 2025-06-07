@@ -136,6 +136,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!PlacementManager.instance.racing && moveInput != Vector2.zero)
+        {
+            PlacementManager.instance.racing = true;
+        }
         CheckDrift();
         SetSprite();
     }
