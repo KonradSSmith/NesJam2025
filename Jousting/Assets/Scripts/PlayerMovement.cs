@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckDrift()
     {
-        if (!driftingLeft && !driftingRight && Input.GetKeyDown(KeyCode.Space) && !waitingToDrift)
+        if (!driftingLeft && !driftingRight && actions.Player.AButton.IsPressed() && actions.Player.BButton.IsPressed() && !waitingToDrift)
         {
             waitingToDrift = true;
         }
@@ -219,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
         while (drifting)
         {
             timeDrifting += Time.deltaTime;
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (!actions.Player.AButton.IsPressed() || !actions.Player.BButton.IsPressed())
             {
                 waitingToDrift = false;
                 driftingLeft = false;

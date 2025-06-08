@@ -168,6 +168,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3eb40c66-56aa-4953-86ac-60ac88983082",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "A Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c31dbebf-0969-4d41-8daa-40a64c3cd021",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -181,6 +192,17 @@
                     "name": "",
                     "id": "7aac4d48-43ad-4ca0-80a1-e323e9f45e71",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "B Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "349a0a3e-cbdb-4510-935a-2614c41f6a40",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",

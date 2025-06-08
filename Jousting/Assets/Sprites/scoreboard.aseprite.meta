@@ -154,7 +154,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 15
+      y: 169
       width: 14
       height: 10
     spriteID: 43aa67420698b6f4eac1d758f949d938
@@ -175,7 +175,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
+      y: 158
       width: 14
       height: 10
     spriteID: b1a344ebf2bf5db4c99ed85d72db5b85
@@ -196,7 +196,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 19
-      y: 15
+      y: 169
       width: 34
       height: 10
     spriteID: 74d9c854b191a354c987ce2f4a849bd2
@@ -217,7 +217,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 19
-      y: 4
+      y: 158
       width: 34
       height: 10
     spriteID: 4d3b461cb7d413841b8917f38e77592f
@@ -238,7 +238,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 57
-      y: 5
+      y: 159
       width: 8
       height: 9
     spriteID: 76120b8732f5fa248b4ed3df973c41c2
@@ -259,7 +259,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 54
-      y: 16
+      y: 170
       width: 32
       height: 3
     spriteID: dfa59a5ccc664144a93ede0d2a18fe75
@@ -289,9 +289,9 @@ ScriptedImporter:
       additiveSortOrder: 0
       cellRect:
         x: 0
-        y: 0
+        y: 25
         width: 82
-        height: 21
+        height: 175
       spriteId: 6a4b55501c16bfd4cbd9a6754dfe30a3
     linkedCells: []
     parentIndex: -1
@@ -335,5 +335,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 120, y: 21}
-  previousTextureSize: {x: 128, y: 32}
+  canvasSize: {x: 120, y: 200}
+  previousTextureSize: {x: 128, y: 256}
