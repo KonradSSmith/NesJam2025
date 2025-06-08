@@ -225,9 +225,10 @@ public class PlayerMovement : MonoBehaviour
                 driftingLeft = false;
                 driftingRight = false;
                 drifting = false;
+                
                 if (boostCoroutine != null)
                 {
-                    StopCoroutine(boostCoroutine);
+                    //StopCoroutine(boostCoroutine);
                 }
                 boostCoroutine = StartCoroutine(DriftBoost(timeDrifting));
                 timeDrifting = 0;
@@ -236,6 +237,11 @@ public class PlayerMovement : MonoBehaviour
             }
             yield return null;
         }
+        waitingToDrift = false;
+        driftingLeft = false;
+        driftingRight = false;
+        drifting = false;
+        StopCoroutine(driftCoroutine);
         yield return null;
     }
 
@@ -265,7 +271,10 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
         boosting = false;
-        boostAcceleration = 1;
+        if (boostTime > 0)
+        {
+            boostAcceleration = 1;
+        }
 
         yield return null;
     }
