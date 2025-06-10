@@ -8,7 +8,7 @@ public class QTEUI : MonoBehaviour
     [SerializeField] Transform leftLimmit;
     [SerializeField] Transform rightLimmit;
     [SerializeField] RectTransform safezone;
-    [SerializeField] float pointerSpeed;
+    [SerializeField] private float pointerSpeed = 100;
 
     private float dir = 1f;
     private RectTransform pointerTransform;
@@ -25,6 +25,7 @@ public class QTEUI : MonoBehaviour
     }*/
     void Start()
     {
+        this.enabled = false;
         actions = new InputSystem_Actions();
         pointerTransform = GetComponent<RectTransform>();
         targetPos = rightLimmit.position;
@@ -33,6 +34,25 @@ public class QTEUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private void Poke()
+    {
+        if (RectTransformUtility.RectangleContainsScreenPoint(safezone, pointerTransform.position, null))
+        {
+            Debug.Log("Won duel");
+            this.enabled=false;
+        }
+        else
+        {
+            Debug.Log("loss");
+            this.enabled = false;
+        }
+    }
+    public void StartQTE()
+    {
+        this.enabled = true;
         pointerTransform.position = Vector3.MoveTowards(pointerTransform.position, targetPos, pointerSpeed * Time.deltaTime);
         //change direction
         if (Vector3.Distance(pointerTransform.position, leftLimmit.position) < 0.1f)
@@ -48,21 +68,9 @@ public class QTEUI : MonoBehaviour
 
         // Check for input
         //if (actions.Player.AButton.WasPressed) //|| actions.Player.BButton.IsPressed)
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             Poke();
-        }
-    }
-
-    private void Poke()
-    {
-        if (RectTransformUtility.RectangleContainsScreenPoint(safezone, pointerTransform.position, null))
-        {
-            Debug.Log("Won duel");
-        }
-        else
-        {
-            Debug.Log("loss");
         }
     }
 
