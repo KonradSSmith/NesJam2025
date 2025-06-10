@@ -31,6 +31,8 @@ public class MoveJoustStick : MonoBehaviour
 
         //trying movetowards next for the UI
 
+
+
         if (actions.Player.AButton.inProgress && transform.position.x > maxLeft)
         {
             transform.Translate(-transform.right * speed * Time.deltaTime);
