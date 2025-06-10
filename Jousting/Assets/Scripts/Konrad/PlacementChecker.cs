@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class PlacementChecker : MonoBehaviour
     [SerializeField] public Jousting jousting;
     [SerializeField] public Image spriteRendererMultiplier;
     public float multiplier;
+    [SerializeField] GameObject lapObject;
 
     public GameObject nextCheckpoint;
     public float placementDistance;
@@ -28,6 +30,10 @@ public class PlacementChecker : MonoBehaviour
         if (newCheckpoint.GetComponent<CheckpointScript>().ID == firstCheckpoint.GetComponent<CheckpointScript>().ID - 1)
         {
             lapsCompleted += 1;
+            if (player)
+            {
+                StartCoroutine(LapCompleted());
+            }
         }
         nextCheckpoint = newCheckpoint;
 
@@ -42,4 +48,18 @@ public class PlacementChecker : MonoBehaviour
         placementDistance = Vector3.Distance(nextCheckpoint.transform.position, transform.position) + nextCheckpoint.GetComponent<CheckpointScript>().ID * 50 - (lapsCompleted * 10000);
     }
 
+    IEnumerator LapCompleted()
+    {
+        lapObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        
+        for (int i = 0; i < 5; i++)
+        {
+            lapObject.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+            lapObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+        }
+        lapObject.SetActive(false);
+    }
 }
