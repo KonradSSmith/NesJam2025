@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float driftingAcceleration;
     private float boostAcceleration = 1;
     private Rigidbody rb;
-    private Vector2 moveInput;
+    public Vector2 moveInput;
     bool reversing = false;
 
     [Header("Sprites")]
@@ -30,12 +30,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Drifting")]
     [SerializeField] private float sharpDriftCameraRotationAmount;
     [SerializeField] private float wideDriftCameraRotationAmount;
-    bool driftingLeft;
-    bool driftingRight;
+    public bool driftingLeft;
+    public bool driftingRight;
     bool waitingToDrift;
     private Coroutine driftCoroutine;
     float timeDrifting = 0;
     float _timer = 0;
+    bool canPlayCharge1 = true;
+    bool canPlayCharge2 = true;
 
     [Header("Drifting Boosts")]
     [SerializeField] private float timeUntilBoost1;
@@ -177,11 +179,21 @@ public class PlayerMovement : MonoBehaviour
             {
                 //boost2
                 spriteRenderer.sprite = horseTurn3;
+                if (canPlayCharge2)
+                {
+                    StartCoroutine(AudioManager.instance.DriftCharge2());
+                    canPlayCharge2 = false;
+                }
             }
             else if (_timer > timeUntilBoost1)
             {
                 //boost1
                 spriteRenderer.sprite = horseTurn2;
+                if (canPlayCharge1)
+                {
+                    StartCoroutine(AudioManager.instance.DriftCharge1());
+                    canPlayCharge1 = false;
+                }
             }
         }
     }
@@ -237,6 +249,8 @@ public class PlayerMovement : MonoBehaviour
                 boostCoroutine = StartCoroutine(DriftBoost(timeDrifting));
                 timeDrifting = 0;
                 _timer = 0;
+                canPlayCharge2 = true;
+                canPlayCharge1 = true;
                 break;
             }
             yield return null;
@@ -259,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
             boosting = true;
             boostAcceleration = boostAmount2;
             boostTime = boostTime2;
+            StartCoroutine(AudioManager.instance.DriftBoost2());
         }
         else if (time > timeUntilBoost1)
         {
@@ -266,6 +281,7 @@ public class PlayerMovement : MonoBehaviour
             boosting = true;
             boostAcceleration = boostAmount1;
             boostTime = boostTime1;
+            StartCoroutine(AudioManager.instance.DriftBoost1());
         }
 
         float timer = 0;

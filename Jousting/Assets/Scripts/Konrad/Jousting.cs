@@ -93,6 +93,7 @@ public class Jousting : MonoBehaviour
 
     IEnumerator HitSomeone()
     {
+        AudioManager.instance.EnemyHit();
         hitAnimation = true;
         rectTransform.anchoredPosition = new Vector3(rectTransform.anchoredPosition.x, -10, 0);
 

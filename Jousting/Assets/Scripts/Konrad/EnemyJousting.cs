@@ -56,6 +56,7 @@ public class EnemyJousting : MonoBehaviour
     IEnumerator EnemyDead()
     {
         agentDriving.StopDriving();
+        AudioManager.instance.EnemyKilled();
         for (int i = 0; i < 5; i++)
         {
             spriteRenderer.enabled = false;

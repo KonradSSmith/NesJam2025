@@ -30,7 +30,7 @@ public class PlacementChecker : MonoBehaviour
         if (newCheckpoint.GetComponent<CheckpointScript>().ID == firstCheckpoint.GetComponent<CheckpointScript>().ID - 1)
         {
             lapsCompleted += 1;
-            if (player)
+            if (player && lapsCompleted > 1)
             {
                 StartCoroutine(LapCompleted());
             }
@@ -50,6 +50,7 @@ public class PlacementChecker : MonoBehaviour
 
     IEnumerator LapCompleted()
     {
+        StartCoroutine(AudioManager.instance.LapSound());
         lapObject.SetActive(true);
         yield return new WaitForSeconds(1);
         
