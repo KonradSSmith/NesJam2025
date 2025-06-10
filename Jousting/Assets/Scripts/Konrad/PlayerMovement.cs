@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (moveInput.x != 0)
             {
-                driftCoroutine = StartCoroutine(Drift());
+                StartCoroutine(Drift());
             }
             if (moveInput.x > 0)
             {
@@ -209,6 +209,10 @@ public class PlayerMovement : MonoBehaviour
                 waitingToDrift = false;
                 driftingLeft = true;
                 driftingRight = false;
+            }
+            if (!actions.Player.AButton.IsPressed() || !actions.Player.BButton.IsPressed())
+            {
+                waitingToDrift = false;
             }
         }
     }
@@ -233,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
                 boostCoroutine = StartCoroutine(DriftBoost(timeDrifting));
                 timeDrifting = 0;
                 _timer = 0;
-                StopCoroutine(driftCoroutine);
+                break;
             }
             yield return null;
         }
@@ -241,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
         driftingLeft = false;
         driftingRight = false;
         drifting = false;
-        StopCoroutine(driftCoroutine);
+        //StopCoroutine(driftCoroutine);
         yield return null;
     }
 

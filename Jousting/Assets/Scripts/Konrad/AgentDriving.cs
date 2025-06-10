@@ -5,14 +5,10 @@ public class AgentDriving : MonoBehaviour
 {
     public GameObject nextCheckpoint;
     [SerializeField] private PlacementChecker checker;
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite hitSprite;
-    [SerializeField] Sprite normalSprite;
-    [SerializeField] float invincibilityTime;
-    private float invincibilityTimer = 0;
 
     [SerializeField] Rigidbody rb;
     public bool racing = false;
+    public bool slowed = false;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -26,7 +22,11 @@ public class AgentDriving : MonoBehaviour
 
     private void Update()
     {
-        invincibilityTimer += Time.deltaTime;
+        if (slowed)
+        {
+            moveSpeed = 0;
+            acceleration = moveSpeed;
+        }
         if (!racing && PlacementManager.instance.racing)
         {
             startRace();
@@ -69,12 +69,25 @@ public class AgentDriving : MonoBehaviour
         StartCoroutine(setSpeed());
     }
 
-
-    public void Jousted()
+    public void SlowDown()
     {
-        if (invincibilityTimer > invincibilityTime)
-        {
-            spriteRenderer.sprite = hitSprite;
-        }
+        slowed = true;
+        StartCoroutine(SlowTime());
+    }
+
+    public void StopDriving()
+    {
+        racing = false;
+        moveSpeed = 0;
+        acceleration = moveSpeed;
+    }
+
+    IEnumerator SlowTime()
+    {
+        yield return new WaitForSeconds(2);
+        slowed = false;
+        moveSpeed = 90;
+        acceleration = moveSpeed;
+
     }
 }

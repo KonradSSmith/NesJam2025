@@ -6,6 +6,8 @@ public class PlacementChecker : MonoBehaviour
     [SerializeField] public bool player = false;
     [SerializeField] private GameObject firstCheckpoint;
     public int lapsCompleted = 0;
+    public float health = 100;
+    [SerializeField] public Jousting jousting;
 
     public GameObject nextCheckpoint;
     public float placementDistance;
@@ -17,6 +19,7 @@ public class PlacementChecker : MonoBehaviour
     {
         setCheckpoint(firstCheckpoint);
     }
+
     public void setCheckpoint(GameObject newCheckpoint)
     {
         if (newCheckpoint.GetComponent<CheckpointScript>().ID == firstCheckpoint.GetComponent<CheckpointScript>().ID - 1)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3408620075301955752}
   - component: {fileID: 5362730667501963825}
   - component: {fileID: 5714822664345413510}
+  - component: {fileID: 3702177324800927637}
   m_Layer: 3
   m_Name: AI_Agent
   m_TagString: Untagged
@@ -100,12 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextCheckpoint: {fileID: 0}
   checker: {fileID: 5714822664345413510}
-  spriteRenderer: {fileID: 7018750980012093587}
-  hitSprite: {fileID: -2942783496551091403, guid: b42ede3db0150e748943a7603f8eda0d, type: 3}
-  normalSprite: {fileID: 21300000, guid: 60a3f27f5bf59ff4bb133ba258c61310, type: 3}
-  invincibilityTime: 0
   rb: {fileID: 3408620075301955752}
   racing: 0
+  slowed: 0
   moveSpeed: 45
   acceleration: 45
 --- !u!114 &5714822664345413510
@@ -124,11 +122,32 @@ MonoBehaviour:
   player: 0
   firstCheckpoint: {fileID: 0}
   lapsCompleted: 0
+  health: 100
   nextCheckpoint: {fileID: 0}
   placementDistance: 0
   playerPlacementDistance: 0
   intPlacement: 0
   playerPlacement: 0
+--- !u!114 &3702177324800927637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984964420386372161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daa905b3649e7949b8a1ee38acb6a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  spriteRenderer: {fileID: 7018750980012093587}
+  agentDriving: {fileID: 5362730667501963825}
+  placementChecker: {fileID: 5714822664345413510}
+  walkSprite1: {fileID: 21300000, guid: 60a3f27f5bf59ff4bb133ba258c61310, type: 3}
+  walkSprite2: {fileID: 21300000, guid: cacfd86f066245248902a94e52249cd2, type: 3}
+  hitSprite: {fileID: -2942783496551091403, guid: b42ede3db0150e748943a7603f8eda0d, type: 3}
+  hitAnimationTime: 1
 --- !u!1 &7320122105874829060
 GameObject:
   m_ObjectHideFlags: 0
