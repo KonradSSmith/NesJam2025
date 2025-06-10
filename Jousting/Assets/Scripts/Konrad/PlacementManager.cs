@@ -58,6 +58,7 @@ public class PlacementManager : MonoBehaviour
             checker.intPlacement = sortedHorses.IndexOf(checker) + 1;
             if (checker.player)
             {
+                checker.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
                 checker.jousting.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
                 foreach (PlacementChecker secondChecker in sortedHorses)
                 {

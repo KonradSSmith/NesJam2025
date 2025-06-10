@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlacementChecker : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlacementChecker : MonoBehaviour
     public int lapsCompleted = 0;
     public float health = 100;
     [SerializeField] public Jousting jousting;
+    [SerializeField] public Image spriteRendererMultiplier;
+    public float multiplier;
 
     public GameObject nextCheckpoint;
     public float placementDistance;
