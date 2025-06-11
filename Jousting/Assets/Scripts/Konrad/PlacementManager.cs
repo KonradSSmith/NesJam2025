@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.TextCore.Text;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlacementManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] public List<PlacementChecker> horses = new List<PlacementChecker>();
     [SerializeField] public List<PlacementChecker> sortedHorses = new List<PlacementChecker>();
     [SerializeField] Dictionary<int, int> placementMultipliers = new Dictionary<int, int>();
+    [SerializeField] GameObject winAnimation;
 
     public int amountAlive = 8;
 
@@ -33,7 +35,7 @@ public class PlacementManager : MonoBehaviour
         placementMultipliers.Add(2, 5);
         placementMultipliers.Add(3, 3);
         placementMultipliers.Add(4, 2);
-        placementMultipliers.Add(5, 1);
+        placementMultipliers.Add(5, 2);
         placementMultipliers.Add(6, 1);
         placementMultipliers.Add(7, 1);
         placementMultipliers.Add(8, 0);
@@ -71,6 +73,10 @@ public class PlacementManager : MonoBehaviour
 
     IEnumerator YouWin()
     {
+        yield return new WaitForSeconds(1);
+        winAnimation.SetActive(true);
+        yield return new WaitForSeconds(6);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         yield return null;
     }
 }
