@@ -87,6 +87,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedChecker: {fileID: 0}
+  healthBar: {fileID: 0}
+  times10: {fileID: 0}
+  times5: {fileID: 0}
+  times3: {fileID: 0}
+  times2: {fileID: 0}
+  times1: {fileID: 0}
+  times0: {fileID: 0}
 --- !u!1 &622527428322532554
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +146,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedChecker: {fileID: 0}
+  healthBar: {fileID: 0}
+  times10: {fileID: 0}
+  times5: {fileID: 0}
+  times3: {fileID: 0}
+  times2: {fileID: 0}
+  times1: {fileID: 0}
+  times0: {fileID: 0}
 --- !u!1 &636563519728475655
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,6 +579,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedChecker: {fileID: 0}
+  healthBar: {fileID: 0}
+  times10: {fileID: 0}
+  times5: {fileID: 0}
+  times3: {fileID: 0}
+  times2: {fileID: 0}
+  times1: {fileID: 0}
+  times0: {fileID: 0}
 --- !u!1 &2091308958782364146
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +638,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedChecker: {fileID: 0}
+  healthBar: {fileID: 0}
+  times10: {fileID: 0}
+  times5: {fileID: 0}
+  times3: {fileID: 0}
+  times2: {fileID: 0}
+  times1: {fileID: 0}
+  times0: {fileID: 0}
 --- !u!1 &2117849174302115873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1397,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedChecker: {fileID: 0}
+  healthBar: {fileID: 0}
+  times10: {fileID: 0}
+  times5: {fileID: 0}
+  times3: {fileID: 0}
+  times2: {fileID: 0}
+  times1: {fileID: 0}
+  times0: {fileID: 0}
 --- !u!1 &4785832391268971362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,6 +2049,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedChecker: {fileID: 0}
+  healthBar: {fileID: 0}
+  times10: {fileID: 0}
+  times5: {fileID: 0}
+  times3: {fileID: 0}
+  times2: {fileID: 0}
+  times1: {fileID: 0}
+  times0: {fileID: 0}
 --- !u!1 &6653840404778217523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,20 +2682,23 @@ MonoBehaviour:
   maxSpeed: 100
   acceleration: 45
   driftingAcceleration: 25
+  moveInput: {x: 0, y: 0}
   spriteRenderer: {fileID: 1319836976625378350}
   horseForward: {fileID: 1093058197, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
   horseTurn1: {fileID: -355979090, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
   horseTurn2: {fileID: -848852576, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
   horseTurn3: {fileID: 612202282, guid: 00b3166ae14d4464c97542edee7ecf54, type: 3}
-  defaultCameraRotationAmount: 1
-  driftCameraTurnAmount: 0.6
+  defaultCameraRotationAmount: 1.5
+  driftCameraTurnAmount: 0.4
   sharpDriftCameraRotationAmount: 1.2
   wideDriftCameraRotationAmount: -1
+  driftingLeft: 0
+  driftingRight: 0
   timeUntilBoost1: 1
-  boostAmount1: 2.5
-  boostTime1: 1
+  boostAmount1: 1.9
+  boostTime1: 1.5
   timeUntilBoost2: 2.3
-  boostAmount2: 3
+  boostAmount2: 2.3
   boostTime2: 2
 --- !u!54 &1199645199026995992
 Rigidbody:
@@ -2719,6 +2764,11 @@ MonoBehaviour:
   player: 1
   firstCheckpoint: {fileID: 0}
   lapsCompleted: 0
+  health: 100
+  jousting: {fileID: 0}
+  spriteRendererMultiplier: {fileID: 0}
+  multiplier: 0
+  lapObject: {fileID: 0}
   nextCheckpoint: {fileID: 0}
   placementDistance: 0
   playerPlacementDistance: 0
