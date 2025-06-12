@@ -1,78 +1,85 @@
-using System;
+using System.Timers;
 using UnityEngine;
 
 public class QTEUI : MonoBehaviour
 {
-    [SerializeField] private InputSystem_Actions actions;
+    public RectTransform pointA; // Reference to the starting point
+    public RectTransform pointB; // Reference to the ending point
+    public RectTransform safeZone; // Reference to the safe zone RectTransform
+    public float moveSpeed = 100f; // Speed of the pointer movement
 
-    [SerializeField] Transform leftLimmit;
-    [SerializeField] Transform rightLimmit;
-    [SerializeField] RectTransform safezone;
-    [SerializeField] private float pointerSpeed = 100;
-
-    private float dir = 1f;
+    private float direction = 1f; // 1 for moving towards B, -1 for moving towards A
     private RectTransform pointerTransform;
-    private Vector3 targetPos;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    /*private void OnEnable()
-    {
-        actions.Player.Enable();
-    }
+    private Vector3 targetPosition;
 
-    private void OnDisable()
-    {
-        actions.Player.Disable();
-    }*/
     void Start()
     {
-        this.enabled = false;
-        actions = new InputSystem_Actions();
         pointerTransform = GetComponent<RectTransform>();
-        targetPos = rightLimmit.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        targetPosition = pointB.position;
+        //pointerTransform.anchoredPosition = Vector3.MoveTowards(pointerTransform.anchoredPosition, targetPosition, moveSpeed * Time.deltaTime);
+        //transform.localPosition = new Vector3(-20, 0, 0) * Time.deltaTime * moveSpeed;
+        //pointerTransform.anchoredPosition = Vector3.MoveTowards(pointerTransform.anchoredPosition, targetPosition, moveSpeed * Time.deltaTime);
         
     }
 
-    private void Poke()
+    void Update()
     {
-        if (RectTransformUtility.RectangleContainsScreenPoint(safezone, pointerTransform.position, null))
+        Debug.Log(pointerTransform.anchoredPosition);
+
+        /*
+                //pointerTransform.anchoredPosition = new Vector2(pointerTransform.anchoredPosition.x - (100 * Time.deltaTime), pointerTransform.anchoredPosition.y);
+                if (pointerTransform.anchoredPosition.x <= -100)
+                {
+                    //go to pointB
+                    Debug.Log("to pointB");
+                    pointerTransform.anchoredPosition = new Vector2(pointerTransform.anchoredPosition.x + (100 * Time.deltaTime), pointerTransform.anchoredPosition.y);
+
+                }
+                else if(pointerTransform.anchoredPosition.x >= 98 )
+                {
+                    //go to point A
+                    Debug.Log("to pointA");
+                    //pointerTransform.anchoredPosition = new Vector2(pointerTransform.anchoredPosition.x - (100 * Time.deltaTime), pointerTransform.anchoredPosition.y);
+
+                }
+                pointerTransform.anchoredPosition = new Vector2(Mathf.Clamp(pointerTransform.anchoredPosition.x, -100, 100), pointerTransform.anchoredPosition.y);
+        */
+        // Move the pointer towards the target position
+        pointerTransform.position = Vector3.MoveTowards(pointerTransform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+        // Change direction if the pointer reaches one of the points
+        if (Vector3.Distance(pointerTransform.position, pointA.position) < 0.1f)
         {
-            Debug.Log("Won duel");
-            this.enabled=false;
+            targetPosition = pointB.position;
+            direction = 1f;
+            //pointerTransform.anchoredPosition = new Vector2(pointerTransform.anchoredPosition.x - (100 * Time.deltaTime), pointerTransform.anchoredPosition.y);
+
         }
-        else
+        else if (Vector3.Distance(pointerTransform.position, pointB.position) < 0.1f)
         {
-            Debug.Log("loss");
-            this.enabled = false;
-        }
-    }
-    public void StartQTE()
-    {
-        this.enabled = true;
-        pointerTransform.position = Vector3.MoveTowards(pointerTransform.position, targetPos, pointerSpeed * Time.deltaTime);
-        //change direction
-        if (Vector3.Distance(pointerTransform.position, leftLimmit.position) < 0.1f)
-        {
-            targetPos = rightLimmit.position;
-            dir = 1f;
-        }
-        else if (Vector3.Distance(pointerTransform.position, rightLimmit.position) < 0.1f)
-        {
-            targetPos = leftLimmit.position;
-            dir = -1f;
+            targetPosition = pointA.position;
+            direction = -1f;
+           // pointerTransform.anchoredPosition = new Vector2(pointerTransform.anchoredPosition.x - (-100 * Time.deltaTime), pointerTransform.anchoredPosition.y);
+
         }
 
         // Check for input
-        //if (actions.Player.AButton.WasPressed) //|| actions.Player.BButton.IsPressed)
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Poke();
+            CheckSuccess();
         }
     }
 
+    void CheckSuccess()
+    {
+        // Check if the pointer is within the safe zone
+        if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
+        {
+            Debug.Log("Success!");
+        }
+        else
+        {
+            Debug.Log("Fail!");
+        }
+    }
 }
-

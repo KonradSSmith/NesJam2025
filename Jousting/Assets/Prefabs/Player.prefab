@@ -442,9 +442,9 @@ RectTransform:
   m_Children:
   - {fileID: 5625690450266243306}
   - {fileID: 9089460323905355239}
-  - {fileID: 8062873977115451710}
   - {fileID: 2542963288882767448}
   - {fileID: 4106673206022500708}
+  - {fileID: 8062873977115451710}
   m_Father: {fileID: 8687923886740341594}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2476,10 +2476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e96c992780fef44180220d337ecffb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftLimmit: {fileID: 2542963288882767448}
-  rightLimmit: {fileID: 4106673206022500708}
-  safezone: {fileID: 9089460323905355239}
-  pointerSpeed: 100
+  pointA: {fileID: 2542963288882767448}
+  pointB: {fileID: 4106673206022500708}
+  safeZone: {fileID: 9089460323905355239}
+  moveSpeed: 100
 --- !u!1 &8140464529690442842
 GameObject:
   m_ObjectHideFlags: 0
