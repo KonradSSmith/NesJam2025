@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc1b31f7dbd8f79409738d4208a459e4
+guid: 7d5532b1a53bcd04b815c9f3e51b410e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 1
+    spriteMeshType: 0
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 1
@@ -73,7 +73,7 @@ ScriptedImporter:
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
     fileImportMode: 0
-    importHiddenLayers: 0
+    importHiddenLayers: 1
     layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
@@ -86,7 +86,7 @@ ScriptedImporter:
     addShadowCasters: 0
   asepriteImporterSettings:
     fileImportMode: 0
-    importHiddenLayers: 0
+    importHiddenLayers: 1
     layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638852536381587296
+  platformSettingsDirtyTick: 638854329229006870
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Continue
+  - name: quickTimeEvent
     originalName: 
-    pivot: {x: 0.5, y: -2.5384614}
+    pivot: {x: 1.25, y: -0.375}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 200
-      height: 39
-    spriteID: 75f4d52313bdccb439a2eb712de792b4
+      width: 64
+      height: 128
+    spriteID: 07a9793b330f4c741a714d1d7537c586
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,7 +145,70 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: Continue_0
+  - name: quickTimeEvent_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 15, y: 15, z: 15, w: 15}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 52
+      width: 32
+      height: 32
+    spriteID: c60a7f7df1347614fafb5d362eab76e5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: quickTimeEvent_1
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 7
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 82
+      width: 32
+      height: 50
+    spriteID: a3dfba6ac2bac0e4d951709ac6414955
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: quickTimeEvent_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 2, y: 2, z: 2, w: 2}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 32
+      height: 32
+    spriteID: a62ce9a4adb55844d852ff83adcf36ef
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: quickTimeEvent_3
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -153,11 +216,32 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 4
-      width: 200
-      height: 39
-    spriteID: 79619a29578373f448ab06e00520f881
+      x: 36
+      y: 148
+      width: 112
+      height: 32
+    spriteID: c94154bff5371e54288dfb41bc62ae22
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: quickTimeEvent_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 20
+      width: 48
+      height: 48
+    spriteID: 91dfff499e0f1a045b3d2a5c583c738a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -169,25 +253,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2582964381
+      value0: 3128283640
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Continue
+    name: quickTimeEvent
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Continue
+    - name: quickTimeEvent
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 24
-        y: 99
-        width: 206
-        height: 39
-      spriteId: 75f4d52313bdccb439a2eb712de792b4
+        x: 48
+        y: 48
+        width: 144
+        height: 176
+      spriteId: 07a9793b330f4c741a714d1d7537c586
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -243,4 +327,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 256, y: 240}
-  previousTextureSize: {x: 256, y: 64}
+  previousTextureSize: {x: 256, y: 256}
