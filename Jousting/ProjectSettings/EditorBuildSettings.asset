@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/Level1.unity
     guid: 8e72087cff95b494e91fc7d39e637024
   - enabled: 1
+    path: Assets/Scenes/Game/DodgeTutorial.unity
+    guid: ae5bedf4144fb874686a9b518ebf12e7
+  - enabled: 1
     path: Assets/Scenes/Game/Level2.unity
     guid: d22baf590c37041459b46dd74f8d471f
   m_configObjects:

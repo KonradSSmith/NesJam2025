@@ -8,6 +8,7 @@ public class WaitToAppear : MonoBehaviour
     float timer = 0;
     private InputSystem_Actions actions;
     public bool needtoClick = true;
+    public bool loadScene = true;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class WaitToAppear : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > timeToWait)
         {
+            
             if (needtoClick)
             {
                 spriteRenderer.enabled = true;
@@ -46,7 +48,14 @@ public class WaitToAppear : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                if (loadScene)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+                else
+                {
+                    spriteRenderer.enabled = true;
+                }
             }
         }
     }

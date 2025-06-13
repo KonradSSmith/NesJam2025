@@ -123,6 +123,11 @@ MonoBehaviour:
   firstCheckpoint: {fileID: 0}
   lapsCompleted: 0
   health: 100
+  jousting: {fileID: 0}
+  spriteRendererMultiplier: {fileID: 0}
+  joustingRangeAI: 15
+  multiplier: 0
+  lapObject: {fileID: 0}
   nextCheckpoint: {fileID: 0}
   placementDistance: 0
   playerPlacementDistance: 0

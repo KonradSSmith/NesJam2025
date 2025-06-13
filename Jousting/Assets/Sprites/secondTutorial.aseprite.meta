@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc1b31f7dbd8f79409738d4208a459e4
+guid: 00211f68456f6af45b81fafee3eeaa23
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638852536381587296
+  platformSettingsDirtyTick: 638854399760142106
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Continue
+  - name: secondTutorial
     originalName: 
-    pivot: {x: 0.5, y: -2.5384614}
+    pivot: {x: 0.5072464, y: -0.22651933}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 200
-      height: 39
-    spriteID: 75f4d52313bdccb439a2eb712de792b4
+      width: 207
+      height: 181
+    spriteID: 8b8deee1ffa693e44b1f22229316fecf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,7 +145,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: Continue_0
+  - name: secondTutorial_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -153,11 +153,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 4
-      width: 200
-      height: 39
-    spriteID: 79619a29578373f448ab06e00520f881
+      x: 16
+      y: 144
+      width: 183
+      height: 41
+    spriteID: c516cb76193813e408135d103e8a27f9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -166,7 +166,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Continue_1
+  - name: secondTutorial_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -174,11 +174,32 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 18
-      y: 65
-      width: 180
-      height: 56
-    spriteID: 67798cf2a0e7fad47af9c30805d71287
+      x: 4
+      y: 46
+      width: 207
+      height: 47
+    spriteID: 3355308aa4128ec4a98f00c0bdba1eea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: secondTutorial_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 22
+      y: 4
+      width: 171
+      height: 21
+    spriteID: cdb571f9fc1f2a2499eff64c32c49569
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -190,25 +211,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2582964381
+      value0: 2007752908
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Continue
+    name: secondTutorial
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Continue
+    - name: secondTutorial
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 24
-        y: 99
-        width: 206
-        height: 117
-      spriteId: 75f4d52313bdccb439a2eb712de792b4
+        x: 23
+        y: 41
+        width: 207
+        height: 181
+      spriteId: 8b8deee1ffa693e44b1f22229316fecf
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -264,4 +285,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 256, y: 240}
-  previousTextureSize: {x: 256, y: 128}
+  previousTextureSize: {x: 256, y: 256}

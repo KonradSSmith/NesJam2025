@@ -70,6 +70,11 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(enemyHit);
     }
 
+    public void PlayerHit()
+    {
+        audioSource.PlayOneShot(playerHit);
+    }
+
     public void EnemyKilled()
     {
         audioSource.PlayOneShot(enemyDisappear);

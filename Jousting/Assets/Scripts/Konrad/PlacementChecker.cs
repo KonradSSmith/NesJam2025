@@ -11,8 +11,10 @@ public class PlacementChecker : MonoBehaviour
     public float health = 100;
     [SerializeField] public Jousting jousting;
     [SerializeField] public Image spriteRendererMultiplier;
+    public float joustingRangeAI;
     public float multiplier;
     [SerializeField] GameObject lapObject;
+    public bool willJoust = false;
 
     public GameObject nextCheckpoint;
     public float placementDistance;
@@ -46,11 +48,27 @@ public class PlacementChecker : MonoBehaviour
     private void Update()
     {
         placementDistance = Vector3.Distance(nextCheckpoint.transform.position, transform.position) + nextCheckpoint.GetComponent<CheckpointScript>().ID * 50 - (lapsCompleted * 10000);
+        if ((placementDistance > playerPlacementDistance) && PlacementManager.instance.racing && intPlacement > playerPlacement)
+        {
+            if (willJoust)
+            {
+                StartCoroutine(QTEUI.instance.indicator(gameObject.transform));
+            }
+        }
+        if (player && health <= 0)
+        {
+            //you die
+        }
     }
 
     IEnumerator LapCompleted()
     {
         StartCoroutine(AudioManager.instance.LapSound());
+        health += 50;
+        if (health > 100)
+        {
+            health = 100;
+        }
         lapObject.SetActive(true);
         yield return new WaitForSeconds(1);
         

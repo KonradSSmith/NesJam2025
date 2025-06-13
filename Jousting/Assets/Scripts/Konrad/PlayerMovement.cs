@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance { get; private set; }
+
     [Header("Basic Movement")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
@@ -49,10 +51,36 @@ public class PlayerMovement : MonoBehaviour
     bool boosting;
     private Coroutine boostCoroutine;
 
+    [Header("Health stuff")]
+    [SerializeField] PlacementChecker placementChecker;
+    [SerializeField] GameObject flashRed;
+
+    public GameObject joustThemAll;
+
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         actions = new InputSystem_Actions();
         rb = GetComponent<Rigidbody>();
+    }
+
+    public IEnumerator takeDamage()
+    {
+        flashRed.SetActive(true);
+        AudioManager.instance.PlayerHit();
+        placementChecker.health -= 30;
+        yield return new WaitForSeconds(0.25f);
+        flashRed.SetActive(false);
+        yield return null;
+
     }
 
     private void OnEnable()
@@ -141,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
         if (!PlacementManager.instance.racing && moveInput != Vector2.zero)
         {
             PlacementManager.instance.racing = true;
+            joustThemAll.SetActive(false);
         }
         CheckDrift();
         SetSprite();
