@@ -14,6 +14,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip playerHit;
     [SerializeField] AudioClip playerDie;
     [SerializeField] AudioClip LapStinger;
+    [SerializeField] AudioClip weakHit;
+    [SerializeField] AudioClip youWin;
+    [SerializeField] AudioClip JoustAlert;
+    [SerializeField] AudioClip joustEscape;
+    [SerializeField] AudioClip Intro;
+    [SerializeField] AudioClip Tutorial;
+    public bool tutorial = false;
+    public bool intro = false;
+    [SerializeField] AudioClip goHorn;
 
     [SerializeField] AudioSource footsteps;
     bool footstepsOn = true;
@@ -21,9 +30,13 @@ public class AudioManager : MonoBehaviour
     bool driftingOn = true;
     [SerializeField] AudioSource music;
     [SerializeField] AudioSource lapSource;
+    [SerializeField] AudioSource joustingSource;
 
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] AudioSource audioSource;
+
+    bool indicating = false;
+    bool animating = false;
 
 
     private void Awake()
@@ -41,27 +54,50 @@ public class AudioManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (intro)
+        {
+            music.mute = true;
+            audioSource.PlayOneShot(Intro);
+        }
+        else if (tutorial)
+        {
+            music.mute = true;
+            audioSource.PlayOneShot(Tutorial);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (footstepsOn && !(playerMovement.driftingLeft || playerMovement.driftingRight) && playerMovement.moveInput != Vector2.zero)
+        if (!animating)
         {
-            footsteps.mute = false;
-        }
-        else
-        {
-            footsteps.mute = true;
-        }
-        if (driftingOn && (playerMovement.driftingLeft || playerMovement.driftingRight))
-        {
-            drifting.mute = false;
-        }
-        else
-        {
-            drifting.mute = true;
+            if (footstepsOn && !(playerMovement.driftingLeft || playerMovement.driftingRight) && playerMovement.moveInput != Vector2.zero)
+            {
+                footsteps.mute = false;
+            }
+            else
+            {
+                footsteps.mute = true;
+            }
+            if (driftingOn && (playerMovement.driftingLeft || playerMovement.driftingRight))
+            {
+                drifting.mute = false;
+            }
+            else
+            {
+                drifting.mute = true;
+            }
+            if (QTEUI.instance.stopped == false)
+            {
+                music.mute = true;
+                footsteps.mute = true;
+                drifting.mute = true;
+                joustingSource.mute = false;
+            }
+            else
+            {
+                joustingSource.mute = true;
+            }
         }
     }
 
@@ -70,8 +106,87 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(enemyHit);
     }
 
+    public void EnemyHitZero()
+    {
+        audioSource.PlayOneShot(weakHit);
+    }
+
+    public IEnumerator YouWin()
+    {
+        if (!animating)
+        {
+            animating = true;
+            music.mute = true;
+            footsteps.mute = true;
+            drifting.mute = true;
+            joustingSource.mute = true;
+            lapSource.mute = true;
+            audioSource.Stop();
+            yield return new WaitForSeconds(1);
+            audioSource.PlayOneShot(youWin);
+            yield return new WaitForSeconds(youWin.length);
+            //music.mute = false;
+            audioSource.mute = true;
+        }
+
+    }
+
+    public IEnumerator YouLose()
+    {
+        if (!animating)
+        {
+            music.mute = true;
+            footsteps.mute = true;
+            drifting.mute = true;
+            joustingSource.mute = true;
+            lapSource.mute = true;
+            animating = true;
+            audioSource.Stop();
+            audioSource.PlayOneShot(playerDie);
+            yield return new WaitForSeconds(playerDie.length);
+            //music.mute = false;   
+            audioSource.mute = true;
+        }
+    }
+    public IEnumerator GoHorn()
+    {
+        music.mute = true;
+        lapSource.PlayOneShot(goHorn);
+        yield return new WaitForSeconds(goHorn.length);
+        music.mute = false;
+    }
+
+    public IEnumerator JoustEscape()
+    {
+        music.mute = true;
+        lapSource.PlayOneShot(joustEscape);
+        yield return new WaitForSeconds(joustEscape.length);
+        music.mute = false;
+    }
+
+    public IEnumerator JoustIndicator()
+    {
+        if (!indicating)
+        {
+            indicating = true;
+            music.mute = true;
+            audioSource.PlayOneShot(JoustAlert);
+            yield return new WaitForSeconds(JoustAlert.length);
+            music.mute = false;
+            indicating = false;
+        }
+    }
+
+    public void JoustSucceed()
+    {
+        audioSource.PlayOneShot(joustEscape);
+        music.mute = false;
+    }
+
     public void PlayerHit()
     {
+        music.mute = false;
+        lapSource.Stop();
         audioSource.PlayOneShot(playerHit);
     }
 
@@ -83,9 +198,11 @@ public class AudioManager : MonoBehaviour
     public IEnumerator LapSound()
     {
         music.mute = true;
+        joustingSource.mute = true;
         lapSource.PlayOneShot(LapStinger);
         yield return new WaitForSeconds(LapStinger.length);
         music.mute = false;
+        joustingSource.mute = false;
     }
 
     public IEnumerator DriftCharge1()

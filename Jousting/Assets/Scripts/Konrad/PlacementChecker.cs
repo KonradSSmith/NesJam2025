@@ -58,6 +58,7 @@ public class PlacementChecker : MonoBehaviour
         if (player && health <= 0)
         {
             //you die
+            StartCoroutine(PlacementManager.instance.YouLose());
         }
     }
 

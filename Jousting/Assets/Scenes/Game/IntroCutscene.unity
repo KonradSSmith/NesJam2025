@@ -1243,10 +1243,20 @@ MonoBehaviour:
   playerHit: {fileID: 8300000, guid: 85297cca914b3fc4da16c91cca0d70be, type: 3}
   playerDie: {fileID: 8300000, guid: e0a8f71cbc4563c40b4eb69f2aadd83b, type: 3}
   LapStinger: {fileID: 8300000, guid: 8b0b14e6074bcde4f8828a2796bffdec, type: 3}
+  weakHit: {fileID: 0}
+  youWin: {fileID: 0}
+  jousting: 1
+  JoustAlert: {fileID: 0}
+  Intro: {fileID: 0}
+  Tutorial: {fileID: 0}
+  tutorial: 0
+  intro: 0
+  goHorn: {fileID: 0}
   footsteps: {fileID: 1967937044}
   drifting: {fileID: 1972879975}
   music: {fileID: 1401047383}
   lapSource: {fileID: 164612914}
+  joustingSource: {fileID: 0}
   playerMovement: {fileID: 400095564}
   audioSource: {fileID: 322713328}
 --- !u!1 &390063245 stripped
@@ -2839,6 +2849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToWait: 25
   needtoClick: 0
+  loadScene: 1
 --- !u!1001 &1826971769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4060,6 +4071,10 @@ PrefabInstance:
     - target: {fileID: 5185461718221947406, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381539897512025241, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
+      propertyPath: intro
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5467518068299172266, guid: 9f46a0006aa65d14ba6050896e1b4dd8, type: 3}
       propertyPath: m_Sprite

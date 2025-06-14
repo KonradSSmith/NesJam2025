@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     {
         flashRed.SetActive(true);
         AudioManager.instance.PlayerHit();
-        placementChecker.health -= 30;
+        placementChecker.health -= 40;
         yield return new WaitForSeconds(0.25f);
         flashRed.SetActive(false);
         yield return null;
@@ -170,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
         {
             PlacementManager.instance.racing = true;
             joustThemAll.SetActive(false);
+            StartCoroutine(AudioManager.instance.GoHorn());
         }
         CheckDrift();
         SetSprite();

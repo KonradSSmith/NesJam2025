@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 
 public class Jousting : MonoBehaviour
 {
@@ -93,7 +94,14 @@ public class Jousting : MonoBehaviour
 
     IEnumerator HitSomeone()
     {
-        AudioManager.instance.EnemyHit();
+        if (multiplier == 0)
+        {
+            AudioManager.instance.EnemyHitZero();
+        }
+        else
+        {
+            AudioManager.instance.EnemyHit();
+        }
         hitAnimation = true;
         rectTransform.anchoredPosition = new Vector3(rectTransform.anchoredPosition.x, -10, 0);
 

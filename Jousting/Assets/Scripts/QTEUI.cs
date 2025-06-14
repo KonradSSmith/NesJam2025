@@ -17,11 +17,13 @@ public class QTEUI : MonoBehaviour
     public GameObject indicatorObject2;
     public float cooldownTime = 5;
     float _timer = 0;
+    bool indicating = false;
+    public bool level1 = false;
 
     private float direction = 1f; // 1 for moving towards B, -1 for moving towards A
     public RectTransform pointerTransform;
     private Vector3 targetPosition;
-    bool stopped = true;
+    public bool stopped = true;
     bool canGetJousted = true;
     private InputSystem_Actions actions;
     Coroutine checkForInputCoroutine;
@@ -71,6 +73,7 @@ public class QTEUI : MonoBehaviour
         stopped = false;
         canGetJousted = false;
         holder.SetActive(true);
+        indicating = false;
     }
 
     void Update()
@@ -166,6 +169,7 @@ public class QTEUI : MonoBehaviour
         else if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position))
         {
             //success
+            AudioManager.instance.JoustSucceed();
         }
         else
         {
@@ -178,38 +182,45 @@ public class QTEUI : MonoBehaviour
 
     public IEnumerator indicator(Transform enemyPosition)
     {
-        if (canGetJousted)
-        {
+            if (canGetJousted)
+            {
+            StartCoroutine(AudioManager.instance.JoustIndicator());
             canGetJousted = false;
-            float startingDistance = Vector3.Distance(enemyPosition.position, Camera.main.transform.position);
+                float startingDistance = Vector3.Distance(enemyPosition.position, Camera.main.transform.position);
 
-            GameObject indicatorToAppear;
-            if (Random.Range(0,2) == 0)
-            {
-                indicatorToAppear = indicatorObject1;
-            }
-            else
-            {
-                indicatorToAppear = indicatorObject2;
-            }
-            for (int i = 0; i < 5; i++)
-            {
+                GameObject indicatorToAppear;
+                if (Random.Range(0, 2) == 0)
+                {
+                    indicatorToAppear = indicatorObject1;
+                }
+                else
+                {
+                    indicatorToAppear = indicatorObject2;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    indicatorToAppear.SetActive(false);
+                    yield return new WaitForSeconds(0.1f);
+                    indicatorToAppear.SetActive(true);
+                    yield return new WaitForSeconds(0.1f);
+                }
                 indicatorToAppear.SetActive(false);
-                yield return new WaitForSeconds(0.1f);
-                indicatorToAppear.SetActive(true);
-                yield return new WaitForSeconds(0.1f);
-            }
-            indicatorToAppear.SetActive(false);
 
-            if (Mathf.Abs(Vector3.Distance(enemyPosition.position, Camera.main.transform.position) - startingDistance) < 15)
-            {
-                StartMinigame();
+                if (Mathf.Abs(Vector3.Distance(enemyPosition.position, Camera.main.transform.position) - startingDistance) < 15)
+                {
+                    if (!level1)
+                {
+                    StartMinigame();
+                }
+                }
+                else
+                {
+                    StartCoroutine(AudioManager.instance.JoustEscape());
+                    yield return new WaitForSeconds(1.5f);
+                    canGetJousted = true;
+                    
+                }
             }
-            else
-            {
-                canGetJousted=true;
-            }
-        }
         yield return null;
     }
 
@@ -228,6 +239,7 @@ public class QTEUI : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(4, 9));
 
         canGetJousted = true;
+        indicating = false;
 
         yield return null;
     }

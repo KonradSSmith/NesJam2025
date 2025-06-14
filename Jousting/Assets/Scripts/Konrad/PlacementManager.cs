@@ -5,6 +5,7 @@ using UnityEngine.TextCore.Text;
 using System.Linq;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class PlacementManager : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] public List<PlacementChecker> sortedHorses = new List<PlacementChecker>();
     [SerializeField] Dictionary<int, int> placementMultipliers = new Dictionary<int, int>();
     [SerializeField] GameObject winAnimation;
-
+    [SerializeField] GameObject loseAnimation;
+    public float _timer = 0;
     public int amountAlive = 8;
 
     public bool racing = false;
@@ -50,33 +52,69 @@ public class PlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (amountAlive <= 1)
+        if (racing)
         {
-            StartCoroutine(YouWin());
+            _timer += Time.deltaTime;
         }
-        sortedHorses = sortedHorses.OrderBy(ch => ch.placementDistance).ToList();
-        foreach(PlacementChecker checker in sortedHorses)
+        if (_timer > 1)
         {
-            checker.intPlacement = sortedHorses.IndexOf(checker) + 1;
-            if (checker.player)
+            if (amountAlive <= 1)
             {
-                checker.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
-                checker.jousting.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
-                foreach (PlacementChecker secondChecker in sortedHorses)
+                StartCoroutine(YouWin());
+            }
+            sortedHorses = sortedHorses.OrderBy(ch => ch.placementDistance).ToList();
+            foreach (PlacementChecker checker in sortedHorses)
+            {
+                checker.intPlacement = sortedHorses.IndexOf(checker) + 1;
+                if (checker.player)
                 {
-                    secondChecker.playerPlacement = sortedHorses.IndexOf(checker) + 1;
-                    secondChecker.playerPlacementDistance = checker.placementDistance;
+                    checker.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
+                    checker.jousting.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
+                    foreach (PlacementChecker secondChecker in sortedHorses)
+                    {
+                        secondChecker.playerPlacement = sortedHorses.IndexOf(checker) + 1;
+                        secondChecker.playerPlacementDistance = checker.placementDistance;
+                    }
                 }
             }
         }
+        else
+        {
+            foreach (PlacementChecker checker in sortedHorses)
+            { 
+                if (checker.player)
+                {
+                    checker.intPlacement = sortedHorses.Count - 1;
+                    checker.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
+                    checker.jousting.multiplier = placementMultipliers[sortedHorses.IndexOf(checker) + 1];
+                    foreach (PlacementChecker secondChecker in sortedHorses)
+                    {
+                        secondChecker.playerPlacement = checker.intPlacement;
+                        secondChecker.playerPlacementDistance = checker.placementDistance;
+                    }
+                }
+            }
+        }
+       
     }
 
     IEnumerator YouWin()
     {
+        StartCoroutine(AudioManager.instance.YouWin());
         yield return new WaitForSeconds(1);
         winAnimation.SetActive(true);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(5.9f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        yield return null;
+    }
+
+    public IEnumerator YouLose()
+    {
+        //yield return new WaitForSeconds(1);
+        loseAnimation.SetActive(true);
+        StartCoroutine(AudioManager.instance.YouLose());
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         yield return null;
     }
 }
